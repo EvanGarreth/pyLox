@@ -23,6 +23,7 @@ def run(data):
 if __name__ == "__main__":
     if len(sys.argv) > 2:
         print(f"Usage: {sys.argv[0]} [script]")
+        sys.exit(64) # EX_USAGE, command used incorrectly. From UNIX sysexits.h
     elif len(sys.argv) == 2:
         run_file(sys.argv[1])
     else:
