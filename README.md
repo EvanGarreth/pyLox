@@ -12,4 +12,4 @@ pip3 install -r requirements.txt
 REPL can be started with `python3 -m pylox` from the base directory. Exit by hitting "Enter" with an empty line. 
 To run a file, use the same command with the path to the file as an extra argument.
 ### Testing
-Tests can be run by issuing the `pytest` command from the base directory.
+Tests can be run by issuing `python3 -m pytest` or `pytest` from the base directory.

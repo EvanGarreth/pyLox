@@ -4,7 +4,8 @@ import pytest
 from ..scanner import Scanner
 from ..token_type import Token_Type as TT
 
-@pytest.mark.parametrize("data,expected", [
+@pytest.mark.parametrize("data,expected",
+    [
         (
             '(){},.-+;*123.456',
             [
@@ -35,7 +36,34 @@ from ..token_type import Token_Type as TT
                 TT.GE,
                 TT.EOF,
             ]
-        )
+        ),
+        (
+            'and class else false for fun if nil or print return super this true var while',
+            [
+                TT.AND,
+                TT.CLASS,
+                TT.ELSE,
+                TT.FALSE,
+                TT.FOR,
+                TT.FUN,
+                TT.IF,
+                TT.NIL,
+                TT.OR,
+                TT.PRINT,
+                TT.RETURN,
+                TT.SUPER,
+                TT.THIS,
+                TT.TRUE,
+                TT.VAR,
+                TT.WHILE,
+                TT.EOF
+            ]
+        ),
+        ('', [TT.EOF,]),
+        ('"test string"', [TT.STRING, TT.EOF]),
+        ('"Unterminated string', [TT.EOF]),
+        ('// comment line', [TT.EOF]),
+        ('variable = 123', [TT.IDENTIFIER, TT.ASSIGN, TT.NUMBER, TT.EOF]),
     ]
 )
 def test_scanner(data, expected):
