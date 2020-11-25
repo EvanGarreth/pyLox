@@ -3,9 +3,11 @@ __version__ = '0.0.1'
 import sys, os
 from pathlib import Path
 from .scanner import Scanner
+from .error import LoxError
 
 class Lox(object):
-    _had_error = False
+    def __init__(self):
+        self.error = LoxError()
 
     def run_file(self, filename):
         filename = Path(filename)
@@ -13,7 +15,7 @@ class Lox(object):
             data = file.read()
         self.run(data)
 
-        if self._had_error:
+        if self.error.had_error:
             sys.exit(os.EX_DATAERR)
 
     def run_prompt(self):
@@ -22,7 +24,7 @@ class Lox(object):
             if data == "":
                 break
             self.run(data)
-            self._had_error = False
+            self.error.had_error = False
 
     def run(self, data):
         scanner = Scanner(data)
@@ -30,10 +32,3 @@ class Lox(object):
 
         for token in tokens:
             print(token)
-
-    def error(self, line, message):
-        self._report(line, "", message)
-
-    def _report(self, line, where, message):
-        print(f"[line {line}] Error{where}: {message}", file=sys.stderr)
-        self._had_error = True

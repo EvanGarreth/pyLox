@@ -1,3 +1,4 @@
+from .error import LoxError
 from .token import Token
 from .token_type import Token_Type as TT
 
@@ -75,16 +76,14 @@ class Scanner(object):
 
         # check for a number or identifier, otherwise announce an error
         if (token := token_type.get(character)) is None:
-            print(token)
             if self._is_digit(character):
                 self._number()
             elif self._is_alpha(character):
                 self._identifier()
             else:
-                print(self._line, f"Unexpected character '{character}'.")
-                #.error(self._line, "Unexpected character '{character}'.")
+                LoxError().error(self._line, "Unexpected character '{character}'.")
             return
-    
+
         if token is TT.NOT and self._match('='):
             token = TT.NOTEQUAL
         elif token == TT.ASSIGN and self._match('='):
@@ -136,8 +135,7 @@ class Scanner(object):
             self._advance()
 
         if self._is_at_end():
-            print(self._line, "Unterminated string.")
-            #.error(self._line, "Unterminated string.")
+            LoxError().error(self._line, "Unterminated string.")
             return
         
         self._advance()
