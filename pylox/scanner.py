@@ -81,7 +81,7 @@ class Scanner(object):
             elif self._is_alpha(character):
                 self._identifier()
             else:
-                LoxError().error(self._line, "Unexpected character '{character}'.")
+                LoxError.error(self._line, f"Unexpected character '{character}'.")
             return
 
         if token is TT.NOT and self._match('='):
@@ -135,7 +135,7 @@ class Scanner(object):
             self._advance()
 
         if self._is_at_end():
-            LoxError().error(self._line, "Unterminated string.")
+            LoxError.error(self._line, "Unterminated string.")
             return
         
         self._advance()
