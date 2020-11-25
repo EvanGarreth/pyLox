@@ -4,7 +4,7 @@ Python3.8 implementation of the [Lox Language](http://craftinginterpreters.com/)
 Tested and working on with python 3.8 on Arch Linux and Ubuntu 18.04.4 via WSL.
 ### Installation
 ```
-git clone git@github.com:EvanGarreth/pyLox.git ./pylox
+git clone https://github.com/EvanGarreth/pyLox.git ./pylox
 cd pylox
 pip3 install -r requirements.txt
 ```
